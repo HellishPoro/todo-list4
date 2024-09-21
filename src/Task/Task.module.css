@@ -1,0 +1,41 @@
+.Task {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	background: #c7d3bf;
+	padding: 10px;
+	margin: 10px 350px 10px 350px;
+	cursor: pointer;
+	border-radius: 25px;
+}
+
+button {
+	border: none;
+	background-color: #B5C6B8;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 25px;
+}
+
+button:active {
+	background-color: #8FA2CA;
+}
+
+span {
+	background-color: #B5C6B8;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 25px;
+}
+
+input {
+	background-color: #B5C6B8;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 25px;
+	border: none;
+}
+
+.input {
+	accent-color: #B5C6B8;
+}
