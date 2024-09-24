@@ -1,10 +1,12 @@
 import style from "./Task.module.css";
-import { useState } from "react";
+import {  useState } from "react";
 
-export const Task = ({ id, text, changeTask, deleteTask, completed }) => {
+export const Task = ({text, id, completed, deleteTask, changeTask}) => {
 	const [textUpdate, setTextUpdate] = useState(text);
 	const [isEdit, setIsEdit] = useState(false);
 	const handleEdit = () => setIsEdit(!isEdit);
+
+
 
 	const handleUpdateTask = () => {
 		changeTask(id, textUpdate).then(() => {

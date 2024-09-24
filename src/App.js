@@ -6,6 +6,8 @@ import { Sort } from './Sort/Sort';
 import { SortContext } from './context/sortContext';
 import { NameListContext } from './context/nameListContext';
 import { NameList } from './NameList/nameList';
+import { TaskListContext } from './context/taskContext';
+import { TaskList } from './taskList/TaskList';
 
 function App() {
 	const [task, setTask] = useState([])
@@ -87,15 +89,16 @@ function App() {
 		setSortBy({ ...sortBy, order: sortBy.order === 'asc' ? 'desc' : 'asc' })
 	}
 
-	const getSort = () => ({
-		handleSort: handleSort,
+	const value = {
+		handleSort,
 		sort: sortBy.order,
-	})
-
-	const use = getSort()
-
+		changeTask,
+		deleteTask,
+		task,
+	}
 	return (
 		<>
+		<TaskListContext.Provider value={value}>
 			<div>
 				<input className={styles.searchData}
 					name='input'
@@ -104,9 +107,7 @@ function App() {
 					onChange={(e) => setSearchData(e.target.value)}
 				/>
 			</div>
-			<NameListContext.Provider>
 				<NameList />
-			</NameListContext.Provider>
 			<div className={styles.createTask}>
 				<input
 					name='title'
@@ -117,19 +118,13 @@ function App() {
 				/>
 				<button className={styles.button} onClick={() => createTask(data)}>Добавить задачу</button>
 			</div>
-			<SortContext.Provider value={use}>
-				<Sort />
-			</SortContext.Provider>
+				<Sort/>
+			{isLoading && <div className={styles.loader}></div> }
+
 			<div className={styles.add}>
-				{isLoading ? <div className={styles.loader}></div> : task.map((task) => (
-					<Task
-						key={task.id}
-						{...task}
-						changeTask={changeTask}
-						deleteTask={deleteTask}
-					/>
-				))}
+				<TaskList/>
 			</div>
+			</TaskListContext.Provider>
 		</>
 	)
 }
